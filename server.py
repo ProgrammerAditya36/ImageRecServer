@@ -23,9 +23,7 @@ bucket = storage.bucket()
 db = firestore.client()
 
 # Create directories for storing faces and data
-output_dir = "captured_faces2"
-if not os.path.exists(output_dir):
-    os.makedirs(output_dir)
+
 
 # JSON files to store face data
 faces_data_file = "faces_data.json"
@@ -108,9 +106,6 @@ async def process_face(face_data: FaceData):
             }
             unique_faces_data.append(face_data)
             save_json(faces_data_file, unique_faces_data)
-            
-            # Save the image locally
-            cv2.imwrite(os.path.join(output_dir, filename), img)
 
             # Upload to Firebase
             upload_to_firebase(blobname, face_encoding, image_data)
@@ -120,7 +115,9 @@ async def process_face(face_data: FaceData):
             return {"is_unique": False}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000)

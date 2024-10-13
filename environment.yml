@@ -1,0 +1,15 @@
+name: myenv
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - dlib
+  - numpy=1.23.5
+  - fastapi=0.115.2
+  - uvicorn=0.31.1
+  - pillow
+  - pip
+  - opencv
+  - pip:
+    - firebase-admin==6.5.0
+    - requests

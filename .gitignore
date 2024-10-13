@@ -4,3 +4,8 @@ __pycache__
 *.pyo
 *.pyd
 node_modules
+firebase.json
+faces_data.json
+captured_faces/
+uploaded_faces.json
+Dockerfile
